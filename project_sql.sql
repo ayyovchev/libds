@@ -191,6 +191,6 @@ CREATE INDEX lwebvisit18_idx ON pls_2018(webvisit);
 CREATE INDEX lsubscrip18_idx ON pls_2018(subscrip);
 
 COPY pls_2018
-FROM 'C:\Users\yovch\Desktop\lib_2018.csv'
+FROM 'C:\Location\lib_2018.csv'
 WITH (FORMAT CSV, HEADER);
 
