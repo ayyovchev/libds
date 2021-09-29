@@ -1,4 +1,4 @@
-# Creating table and uploading data from Public Libraries Survey 2019
+-- Creating table and uploading data from Public Libraries Survey 2019
 
 CREATE TABLE pls_2019 (
   stabr varchar(2) NOT NULL,
@@ -96,7 +96,7 @@ COPY pls_2019
 FROM 'C:\Location\lib_2019.csv'
 WITH (FORMAT CSV, HEADER);
 
-# Creating table and uploading data from Public Libraries Survey 2018
+-- Creating table and uploading data from Public Libraries Survey 2018
 
 CREATE TABLE pls_2018 (
   stabr varchar(2) NOT NULL,
@@ -193,4 +193,61 @@ CREATE INDEX lsubscrip18_idx ON pls_2018(subscrip);
 COPY pls_2018
 FROM 'C:\Location\lib_2018.csv'
 WITH (FORMAT CSV, HEADER);
+
+/* Queary to find total visits for 2018 and 2019 with percentage change
+between the two years, group by State.*/
+
+SELECT pls19.stabr, 
+	SUM(pls19.visits) AS visits_2019,
+	SUM(pls18.visits) AS visits_2018,
+	round( (CAST(SUM(pls19.visits) AS decimal(10,1)) - SUM(pls18.visits)) /
+                    SUM(pls18.visits) * 100, 2 ) AS percentage_change
+FROM pls_2019 pls19 JOIN pls_2018 pls18
+ON pls19.fscskey = pls18.fscskey
+WHERE pls19.visits >= 0 AND pls18.visits >= 0
+GROUP BY pls19.stabr
+ORDER BY percentage_change DESC; 
+
+/* Queary to find total wifi sessions for 2018 and 2019 with percentage change
+between the two years, group by State.*/
+
+SELECT pls19.stabr, 
+	SUM(pls19.wifisess) AS wifi_sessions_2019,
+	SUM(pls18.wifisess) AS wifi_sessions_2018,
+	round( (CAST(SUM(pls19.wifisess) AS decimal(10,1)) - SUM(pls18.wifisess)) /
+                    SUM(pls18.wifisess) * 100, 2 ) AS percentage_change
+FROM pls_2019 pls19 JOIN pls_2018 pls18
+ON pls19.fscskey = pls18.fscskey
+WHERE pls19.wifisess >= 0 AND pls18.wifisess >= 0
+GROUP BY pls19.stabr
+ORDER BY percentage_change DESC; 
+
+/* Queary to find total library website visits sessions for 2018 and 2019 with percentage change
+between the two years, group by State.*/
+
+SELECT pls19.stabr,
+       SUM(pls19.webvisit) AS websessions_2019,
+       SUM(pls18.webvisit) AS websessions_2018,
+       round( (CAST(SUM(pls19.webvisit) AS decimal(10,1)) - SUM(pls18.webvisit)) /
+                    SUM(pls18.webvisit) * 100, 2 ) AS percentage_change
+FROM pls_2019 pls19 JOIN pls_2018 pls18
+ON pls19.fscskey = pls18.fscskey
+WHERE pls19.webvisit >= 0 AND pls18.webvisit >= 0
+GROUP BY pls19.stabr
+ORDER BY percentage_change DESC;
+
+/* Queary to find total public computers sessions for 2018 and 2019 with percentage change
+between the two years, group by State.*/
+
+SELECT pls19.stabr,
+       SUM(pls19.pitusr) AS computers_used_2019,
+       SUM(pls18.pitusr) AS computers_used_2018,
+       round( (CAST(SUM(pls19.pitusr) AS decimal(10,1)) - SUM(pls18.pitusr)) /
+                    SUM(pls18.pitusr) * 100, 2 ) AS percentage_change
+FROM pls_2019 pls19 JOIN pls_2018 pls18
+ON pls19.fscskey = pls18.fscskey
+WHERE pls19.pitusr >= 0 AND pls18.pitusr >= 0
+GROUP BY pls19.stabr
+ORDER BY percentage_change DESC;
+
 
