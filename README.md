@@ -11,5 +11,5 @@ My project was inspired and my code was adapted by the book Practical SQL by Ant
 
 1. Data downloaded and initially cleaned from the original csv file with Excel. Columns that are not needed for the project were removed.
 2. Data uploaded in PostgreSQL Database to utilise the SQL power of Joining tables and aggregate data.
-3. After the required SQL queries were completed, the temporary tables were downloaded and imported in Excel file for further small amendmends before the visualisation process.
-4. Visualisation is completed in Power BI and can be downloaded from the project repository. 
+3. After the required SQL queries were completed, the temporary tables were downloaded and imported in Excel file for further small amendments before the visualisation process.
+4. The visualisation is completed in Power BI and can be downloaded from the project repository. 
