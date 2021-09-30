@@ -1,5 +1,4 @@
-# libds
-Analysis on digital services used in USA libraries for 2018 and 2019 fiscal years.
+# Analysis on digital services used in USA libraries for 2018 and 2019 fiscal years.
 
 This is descriptive analysis from the data for the fiscal years 2018 and 2019, focusing on the usage of digital services provided by USA libraries.
 
